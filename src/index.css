@@ -1,0 +1,36 @@
+#root {
+  max-width: 1280px;
+  min-width: 320px;  
+  margin: 0 auto;
+}
+
+body {
+  font-family: Montserrat, sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 28px;
+  letter-spacing: 0.2px;
+}
+
+/** ------------- RESET STYLES ------------- */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+}
+
+button {
+  cursor: pointer;  
+}
+
+ul,
+ol {
+  list-style: none;
+  margin: 0;
+  padding-left: 0;
+}

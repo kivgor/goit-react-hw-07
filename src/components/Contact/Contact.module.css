@@ -1,0 +1,36 @@
+.listItem {
+  border: 2px solid black;
+  padding: 10px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 400px;
+}
+
+.buttonThumb {
+  display: flex;
+  flex-direction: column;
+}
+
+.iconThumb {
+  display: flex;
+  gap: 10px;
+}
+
+.button {
+  padding: 5px 10px;
+  font-family: Montserrat, sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 28px;
+  letter-spacing: 0.2px;
+  border: 1px solid black;
+  border-radius: 5px;
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  margin-left: 10px;
+}
+
+.name {
+  text-transform:capitalize ;
+}
