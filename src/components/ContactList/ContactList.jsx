@@ -1,5 +1,9 @@
 import { useEffect } from 'react';
-import { selectContacts } from '../../redux/contactsSlice';
+import {
+  selectContacts,
+  selectIsError,
+  selectIsLoading,
+} from '../../redux/contactsSlice';
 import { selectNameFilter } from '../../redux/filtersSlice';
 import Contact from '../Contact/Contact';
 import css from './ContactList.module.css';
@@ -11,6 +15,9 @@ const ContactList = () => {
   useEffect(() => {
     dispatch(fetchData());
   }, [dispatch]);
+
+  const isloading = useSelector(selectIsLoading);
+  const isError = useSelector(selectIsError);
 
   const phonebook = useSelector(selectContacts);
   const statusFilter = useSelector(selectNameFilter);
@@ -29,6 +36,8 @@ const ContactList = () => {
 
   return (
     <>
+      {isError && <h2>Something went wrong!</h2>}
+      {isloading && <h2>Loading...</h2>}
       <ul className={css.list}>
         {visibleContacts.map(contact => (
           <Contact {...contact} key={contact.id} />

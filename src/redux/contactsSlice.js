@@ -38,9 +38,20 @@ const slice = createSlice({
     },
   },
   extraReducers: builder => {
-    builder.addCase(fetchData.fulfilled, (state, action) => {
-      state.contacts.items = action.payload;
-    });
+    builder
+      .addCase(fetchData.fulfilled, (state, action) => {
+        state.contacts.items = action.payload;
+        state.isLoading = false;
+      })
+      .addCase(fetchData.rejected, (state, action) => {
+        // state.isError = true;
+        state.isError = action.payload;
+        state.isLoading = false;
+      })
+      .addCase(fetchData.pending, state => {
+        state.isLoading = true;
+        state.isError = false;
+      });
   },
 });
 export const contactReducer = slice.reducer;
@@ -52,3 +63,5 @@ export const {
   fetchDataSucess,
 } = slice.actions;
 export const selectContacts = state => state.contacts.contacts.items;
+export const selectIsLoading = state => state.contacts.isLoading;
+export const selectIsError = state => state.contacts.isError;
