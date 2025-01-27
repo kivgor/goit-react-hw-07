@@ -1,10 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit';
-import initPhonebook from '../initialList.json';
+import { fetchData } from './contactsOps';
+// import initPhonebook from '../initialList.json';
 
 const initialState = {
   contacts: {
-    items: initPhonebook,
+    // items: initPhonebook,
+    items: [],
   },
+  isLoading: false,
+  isError: false,
 };
 
 const slice = createSlice({
@@ -20,8 +24,31 @@ const slice = createSlice({
         item => item.id !== action.payload
       );
     },
+
+    setLoading: (state, action) => {
+      state.isLoading = action.payload;
+    },
+
+    setError: (state, action) => {
+      state.isError = action.payload;
+    },
+
+    fetchDataSucess: (state, action) => {
+      state.contacts.items = action.payload;
+    },
+  },
+  extraReducers: builder => {
+    builder.addCase(fetchData.fulfilled, (state, action) => {
+      state.contacts.items = action.payload;
+    });
   },
 });
 export const contactReducer = slice.reducer;
-export const { addContact, deleteContact } = slice.actions;
+export const {
+  addContact,
+  deleteContact,
+  setLoading,
+  setError,
+  fetchDataSucess,
+} = slice.actions;
 export const selectContacts = state => state.contacts.contacts.items;
