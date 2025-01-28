@@ -3,8 +3,7 @@ import css from './ContactForm.module.css';
 import * as Yup from 'yup';
 import { ErrorMessage } from 'formik';
 import { useDispatch } from 'react-redux';
-import { customAlphabet } from 'nanoid';
-import { addContact } from '../../redux/contactsSlice';
+import { addContact } from '../../redux/contactsOps';
 
 const initialValues = {
   username: '',
@@ -26,11 +25,7 @@ const ContactForm = () => {
   const dispatch = useDispatch();
 
   const handleAdd = (values, actions) => {
-    const nanoid = customAlphabet('1234567890', 5);
-    const contactId = nanoid();
-
     const newContact = {
-      id: contactId,
       name: values.username,
       number: values.number,
     };
