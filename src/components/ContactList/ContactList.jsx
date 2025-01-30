@@ -1,39 +1,16 @@
-import { useEffect } from 'react';
 import {
-  selectContacts,
+  selectFilteredContacts,
   selectIsError,
   selectIsLoading,
 } from '../../redux/contactsSlice';
-import { selectNameFilter } from '../../redux/filtersSlice';
 import Contact from '../Contact/Contact';
 import css from './ContactList.module.css';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchData } from '../../redux/contactsOps';
+import { useSelector } from 'react-redux';
 
 const ContactList = () => {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(fetchData());
-  }, [dispatch]);
-
   const isloading = useSelector(selectIsLoading);
   const isError = useSelector(selectIsError);
-
-  const phonebook = useSelector(selectContacts);
-  const statusFilter = useSelector(selectNameFilter);
-
-  const getVisibleContacts = (phonebook, statusFilter) => {
-    const newPhonebook = phonebook.filter(contact =>
-      contact.name
-        .toLowerCase()
-        .trim()
-        .includes(statusFilter.toLowerCase().trim())
-    );
-    return newPhonebook;
-  };
-
-  const visibleContacts = getVisibleContacts(phonebook, statusFilter);
-
+  const visibleContacts = useSelector(selectFilteredContacts);
   return (
     <>
       {isError && <h2>Something went wrong!</h2>}
